@@ -14,17 +14,22 @@
 
 static int	create_threads(t_data *data);
 
-int	get_game(t_philo *p)
+int	main(int argc, char *argv[])
 {
-	int	i;
+	t_data	*data;
 
-	pthread_mutex_lock(&p->philo_lock);
-	i = p->game;
-	pthread_mutex_unlock(&p->philo_lock);
-	return (i);
+	data = parse_arguments(argc, argv);
+	if (!data)
+		return (1);
+	data = initialize_table(data);
+	if (!data)
+		return (1);
+	if (!create_threads(data))
+		monitor(data);
+	monitor(data);
+	free_all(data, NULL);
 }
 
-// TODO spostare questa cosa direttamente in initialize_table()
 static int	create_threads(t_data *data)
 {
 	t_philo	*p;
@@ -40,20 +45,4 @@ static int	create_threads(t_data *data)
 		p = p->right_philo;
 	}
 	return (0);
-}
-
-int	main(int argc, char *argv[])
-{
-	t_data	*data;
-
-	data = parse_arguments(argc, argv);
-	if (!data)
-		return (1);
-	data = initialize_table(data);
-	if (!data)
-		return (1);
-	if (!create_threads(data))
-		monitor(data);
-	monitor(data);
-	free_all(data, NULL);
 }

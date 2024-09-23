@@ -66,14 +66,12 @@ void	display_table(t_data *data)
 	}
 }
 
-t_bool	get_gameover(t_data *data, t_bool action)
+int	get_game(t_philo *p)
 {
-	t_bool	ret;
+	int	i;
 
-	pthread_mutex_lock(&data->game_lock);
-	if (action == true)
-		data->game_over = true;
-	ret = data->game_over;
-	pthread_mutex_unlock(&data->game_lock);
-	return (ret);
+	pthread_mutex_lock(&p->philo_lock);
+	i = p->game;
+	pthread_mutex_unlock(&p->philo_lock);
+	return (i);
 }
