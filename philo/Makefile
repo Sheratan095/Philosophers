@@ -5,7 +5,7 @@ SRC = src/main.c \
 	src/cleaning.c \
 	src/initialize.c \
 	src/philosopher.c \
-	src/game_o.c \
+	src/game_over.c \
 	src/monitoring.c \
 	src/utils/utils.c \
 	src/utils/conversions.c \
