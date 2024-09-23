@@ -83,12 +83,6 @@ t_bool	get_gameover(t_data *data, t_bool ac);
 
 void	monitor(t_data *data);
 
-t_philo	*check_philo(t_data *data);
-
-int		check_death(t_philo *p);
-
-int		check_meal(t_philo *p);
-
 int		get_game(t_philo *p);
 
 void	game_over(t_data *data);
