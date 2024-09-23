@@ -75,10 +75,6 @@ void	ft_mutex_write(t_philo *p, char *str);
 
 void	*philo_routine(void *args);
 
-void	philo_sleep(t_philo *p);
-
-void	philo_eat(t_philo *p);
-
 t_bool	get_gameover(t_data *data, t_bool ac);
 
 void	monitor(t_data *data);

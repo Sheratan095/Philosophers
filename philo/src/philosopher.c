@@ -12,7 +12,9 @@
 
 #include "philo.h"
 
-t_bool	take_forks(t_philo *philo);
+static void		philo_sleep(t_philo *p);
+static void		philo_eat(t_philo *p);
+static t_bool	take_forks(t_philo *philo);
 
 void	*philo_routine(void *args)
 {
@@ -28,13 +30,13 @@ void	*philo_routine(void *args)
 	return (NULL);
 }
 
-void	philo_sleep(t_philo *p)
+static void	philo_sleep(t_philo *p)
 {
 	ft_mutex_write(p, "is sleeping.");
 	ft_usleep(p->data->time_to_sleep);
 }
 
-void	philo_eat(t_philo *p)
+static void	philo_eat(t_philo *p)
 {
 	if (p->data->number_of_philosophers == 1)
 		return ;
@@ -62,7 +64,7 @@ void	philo_eat(t_philo *p)
 	ft_mutex_write(p, "is thinking.");
 }
 
-t_bool	take_forks(t_philo *philo)
+static t_bool	take_forks(t_philo *philo)
 {
 	int	f_r;
 	int	f_l;
