@@ -73,6 +73,8 @@ void	*free_all(t_data *data, char *error);
 
 void	ft_mutex_write(t_philo *p, char *str);
 
+void	*philo_routine(void *args);
+
 void	philo_sleep(t_philo *p);
 
 void	philo_eat(t_philo *p);

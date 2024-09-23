@@ -24,20 +24,6 @@ int	get_game(t_philo *p)
 	return (i);
 }
 
-void	*philo_routine(void *args)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)args;
-	if (philo->id % 2)
-		philo_sleep(philo);
-	while (get_game(philo))
-	{
-		philo_eat(philo);
-	}
-	return (NULL);
-}
-
 // TODO spostare questa cosa direttamente in initialize_table()
 static int	create_threads(t_data *data)
 {

@@ -14,6 +14,20 @@
 
 t_bool	take_forks(t_philo *philo);
 
+void	*philo_routine(void *args)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)args;
+	if (philo->id % 2)
+		philo_sleep(philo);
+	while (get_game(philo))
+	{
+		philo_eat(philo);
+	}
+	return (NULL);
+}
+
 void	philo_sleep(t_philo *p)
 {
 	ft_mutex_write(p, "is sleeping.");
