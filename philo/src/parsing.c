@@ -12,6 +12,9 @@
 
 #include "philo.h"
 
+static t_data	*load_arguments(t_data *data, char *argv[], int argc);
+static int		get_single_arg(int *taget, char *arg);
+
 // Check argc
 // Try and check malloc
 // Get the values from argv

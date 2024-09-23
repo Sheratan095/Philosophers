@@ -12,6 +12,8 @@
 
 #include "philo.h"
 
+static int	create_threads(t_data *data);
+
 int	get_game(t_philo *p)
 {
 	int	i;
@@ -37,27 +39,20 @@ void	*philo_routine(void *args)
 }
 
 // TODO spostare questa cosa direttamente in initialize_table()
-int	create_threads(t_data *data)
+static int	create_threads(t_data *data)
 {
 	t_philo	*p;
 
 	p = data->first_philo;
-	if (create_philo_routine(p))
+	if ((pthread_create(&p->thread_id, NULL, philo_routine, p)))
 		return (1);
 	p = p->right_philo;
 	while (p != data->first_philo)
 	{
-		if (create_philo_routine(p))
+		if (pthread_create(&p->thread_id, NULL, philo_routine, p))
 			return (1);
 		p = p->right_philo;
 	}
-	return (0);
-}
-
-int	create_philo_routine(t_philo *p)
-{
-	if (pthread_create(&p->thread_id, NULL, philo_routine, p))
-		return (1);
 	return (0);
 }
 
