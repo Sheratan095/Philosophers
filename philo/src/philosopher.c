@@ -14,7 +14,6 @@
 
 static void		philo_sleep(t_philo *p);
 static void		philo_eat(t_philo *p);
-static t_bool	take_forks(t_philo *philo);
 
 void	*philo_routine(void *args)
 {
@@ -62,28 +61,4 @@ static void	philo_eat(t_philo *p)
 	pthread_mutex_unlock(&p->r_fork->fork);
 	philo_sleep(p);
 	ft_mutex_write(p, "is thinking.");
-}
-
-static t_bool	take_forks(t_philo *philo)
-{
-	int	f_r;
-	int	f_l;
-
-	if (philo->r_fork->is_avaible && philo->l_fork->is_avaible)
-	{
-		f_r = pthread_mutex_lock(&philo->r_fork->fork);
-		f_l = pthread_mutex_lock(&philo->l_fork->fork);
-		if (f_r != 0 || f_l != 0)
-		{
-			if (f_r != 0)
-				pthread_mutex_unlock(&philo->r_fork->fork);
-			if (f_l != 0)
-				pthread_mutex_unlock(&philo->l_fork->fork);
-			return (false);
-		}
-		philo->r_fork->is_avaible = true;
-		philo->l_fork->is_avaible = true;
-		return (true);
-	}
-	return (false);
 }
