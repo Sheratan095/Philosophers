@@ -13,7 +13,7 @@
 #include "philo.h"
 
 static t_philo	*new_philo(t_data *data, int id, t_philo *left_philo);
-static t_bool	distr_forks(t_data *data);
+static t_bool	distribute_forks(t_data *data);
 static t_fork	*new_fork(t_data *data);
 
 // Used to allocate philosophers and forks
@@ -48,7 +48,7 @@ t_data	*initialize_table(t_data *data)
 	}
 	philo_tmp->right_philo = data->first_philo;
 	data->first_philo->left_philo = philo_tmp;
-	distr_forks(data);
+	distribute_forks(data);
 	if (!data->first_philo->r_fork)
 		return (free_all(data, "Error\n fork allocation failed"));
 	return (data);
@@ -74,7 +74,7 @@ static t_philo	*new_philo(t_data *data, int id, t_philo *left_philo)
 	return (philo);
 }
 
-static t_bool	distr_forks(t_data *data)
+static t_bool	distribute_forks(t_data *data)
 {
 	t_philo	*philo;
 	int		i;
