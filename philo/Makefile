@@ -67,7 +67,7 @@ hel: all
 	valgrind --tool=helgrind --history-level=approx -s ./$(NAME) $(ARG)
 
 val: all
-	 valgrind --leak-check=full --track-origins=yes -s --show-leak-kinds=all ./$(NAME) $(ARG)
+	 valgrind --leak-check=full --track-origins=yes -s --show-leak-kinds=all ./$(NAME) 2 800 200 200 10
 
 
 #COLORS
