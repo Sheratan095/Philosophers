@@ -6,7 +6,7 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:05:01 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/24 15:40:13 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:28:33 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ static void	philo_sleep(t_philo *philo)
 	if (ther's just one philo)
 		return
 	if the current philo is the last one
-		lock (take) rigth fork and then the left one
+		lock (take) right fork and then the left one
 	else
-		unlock (take) left fork and then the rigth one
+		unlock (take) left fork and then the right one
 	[it's done because otherwise the last philo would wait forever]
 	print the messages for the forks and for eating
 	lock the philo
