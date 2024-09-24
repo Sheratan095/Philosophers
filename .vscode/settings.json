@@ -2,6 +2,7 @@
 	"files.associations": {
 		"*.embeddedhtml": "html",
 		"limits.h": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"time.h": "c"
 	}
 }

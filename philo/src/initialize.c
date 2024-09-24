@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 12:53:56 by lebartol          #+#    #+#             */
-/*   Updated: 2024/08/11 14:39:41 by tfalchi          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:38:33 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ static t_fork	*new_fork(t_data *data)
 		return (free_all(data, "Error\n fork allocation failed"));
 	if (pthread_mutex_init(&new_f->fork, NULL))
 		return (free_all(data, "Error\n fork allocation failed"));
-	new_f->is_avaible = true;
 	return (new_f);
 }

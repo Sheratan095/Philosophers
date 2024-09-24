@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:01:24 by lebartol          #+#    #+#             */
-/*   Updated: 2024/08/11 14:33:07 by tfalchi          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:38:38 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 typedef struct s_fork
 {
 	pthread_mutex_t	fork;
-	t_bool			is_avaible;
 }	t_fork;
 
 // Is managed as a "chain" connecting first and last "nodes"

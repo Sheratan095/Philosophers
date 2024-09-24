@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfalchi <tfalchi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:55:14 by lebartol          #+#    #+#             */
-/*   Updated: 2024/08/11 14:25:33 by tfalchi          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:38:31 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,6 @@ int	ft_usleep(size_t milliseconds)
 	while ((get_current_time() - start) < milliseconds)
 		usleep(1000);
 	return (0);
-}
-
-void	display_table(t_data *data)
-{
-	t_philo	*philo_tmp;
-	int		i;
-
-	i = 1;
-	printf("%p writelock\n", &data->write_lock);
-	printf("%p gameover\n", &data->game_over);
-	philo_tmp = data->first_philo;
-	while (i <= data->number_of_philosophers)
-	{
-		printf("%p <- Current id:%i -> %p\n", &philo_tmp->l_fork->is_avaible,
-			philo_tmp->id, &philo_tmp->r_fork->is_avaible);
-		printf("%p <- Current id:%i -> %p\n", &philo_tmp->l_fork->fork,
-			philo_tmp->id, &philo_tmp->r_fork->fork);
-		printf("on his left id: %p, ", &philo_tmp->left_philo->id);
-		printf("on his rigth id: %p\n", &philo_tmp->right_philo->id);
-		printf("lock no.%p\n", &philo_tmp->philo_lock);
-		philo_tmp = philo_tmp->right_philo;
-		i++;
-	}
 }
 
 int	get_game(t_philo *p)
