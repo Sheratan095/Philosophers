@@ -45,6 +45,21 @@ t_data	*parse_arguments(int argc, char *argv[])
 //	if an error occurs, the error is specific for each parameter
 // Last, being optional is verified just when argc == 6
 //	if isn't specified: -1
+/**
+ @brief Check the single arg and assign it to the target pointer
+
+ @param target Pointer to the respective value in the main struct
+ @param arg Pointer to the string that contains the arg
+
+ @details
+	Check if string is numeric
+		(it includes first sign: ++1: wrong, +1: ok)
+	Check with atol if the number respects the limits of integer
+	Assign the value to target pointer with atoi() and check the conversion
+
+ @retval target
+ @retval -1 if the value ins't valid
+*/
 static t_data	*load_arguments(t_data *data, char *argv[], int argc)
 {
 	if (get_single_arg(&data->number_of_philosophers, argv[1]) == -1)
@@ -66,14 +81,21 @@ static t_data	*load_arguments(t_data *data, char *argv[], int argc)
 	return (data);
 }
 
-// Used to check every single argc because all of them respect the same
-//	rules and are of the same type
-// Assign to target the value get by arg
-// Check if string is numeric, it includes first sign: ++1: wrong, +1: ok
-// Check with atol fi the number isn't bigger than int
-//	beacuse it can't be checked just atoi, it would cast it with an overflow
-// Assign the value to target parameter and return it
-// Return the number alreay parsed or -1 if ther's some errors
+/**
+ @brief Check the single arg and assign it to the target pointer
+
+ @param target Pointer to the respective value in the main struct
+ @param arg Pointer to the string that contains the arg
+
+ @details
+	Check if string is numeric
+		(it includes first sign: ++1: wrong, +1: ok)
+	Check with atol if the number respects the limits of integer
+	Assign the value to target pointer with atoi() and check the conversion
+
+ @retval target
+ @retval -1 if the value ins't valid
+*/
 static int	get_single_arg(int *taget, char *arg)
 {
 	if (!ft_is_string_numeric(arg))
