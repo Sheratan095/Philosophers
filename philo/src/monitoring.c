@@ -6,7 +6,7 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/25 16:36:13 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:40:49 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,24 @@ static t_bool	check_death(t_philo *philo);
 static t_bool	check_meals(t_data *data);
 static t_bool	check_meal(t_philo *philo);
 
+/**
+ @brief Monitoring of the state of program
+
+ @param data Pointer to the main struct
+
+ @details
+	Wait until no one dies
+	When one of them died
+	Check if they are all satisfied or someone died
+	That's because when all of them are satisfied the program end
+
+ @return true if philosophers have eaten enough times
+ @return false if philosophers haven't eaten enough times
+*/
 void	monitor(t_data *data)
 {
 	while (!check_philo(data))
-	{
 		usleep(2000);
-	}
 	if (check_meals(data))
 		ft_mutex_write(data->first_philo, "each philosopher is satisfied");
 	else
@@ -67,6 +79,23 @@ static t_bool	check_death(t_philo *philo)
 	return (is_dead);
 }
 
+/**
+ @brief Check if the all philosophers are satisfied
+
+ @param data Pointer to the main struct
+
+ @details
+	if (number of meals == -1) => not specified
+		return false
+	Check if each philosopher is satisfied
+	if one them is not
+		return false
+	if all of them are satisfied
+		return true
+
+ @return true if philosophers have eaten enough times
+ @return false if philosophers haven't eaten enough times
+*/
 static t_bool	check_meals(t_data *data)
 {
 	t_philo	*philo;
@@ -88,6 +117,20 @@ static t_bool	check_meals(t_data *data)
 	return (true);
 }
 
+/**
+ @brief Check if the philosopher is satisfied
+
+ @param philo Pointer to the philosopher
+
+ @details
+	Lock the philosopher mutex
+	Check if the number of meals eaten by the philo corresponds
+		to the number of meals that should be eaten by each philosopher
+	Unlock the philosopher mutex
+
+ @return true if the philosopher ate enough times
+ @return false if the philosopher didn't eat enough times
+*/
 static t_bool	check_meal(t_philo *philo)
 {
 	int	is_satisfied;
