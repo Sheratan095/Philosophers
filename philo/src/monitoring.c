@@ -6,16 +6,16 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/24 15:46:26 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:36:13 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static t_philo	*check_philo(t_data *data);
-static int		check_death(t_philo *p);
-static int		check_meals(t_data *data);
-static int		check_meal(t_philo *p);
+static t_bool	check_death(t_philo *philo);
+static t_bool	check_meals(t_data *data);
+static t_bool	check_meal(t_philo *philo);
 
 void	monitor(t_data *data)
 {
@@ -32,68 +32,68 @@ void	monitor(t_data *data)
 
 static t_philo	*check_philo(t_data *data)
 {
-	t_philo	*p;
+	t_philo	*philo;
 
-	p = data->first_philo;
-	if (check_death(p))
-		return (p);
-	if (p->right_philo)
-		p = p->right_philo;
-	while (p != data->first_philo)
+	philo = data->first_philo;
+	if (check_death(philo))
+		return (philo);
+	if (philo->right_philo)
+		philo = philo->right_philo;
+	while (philo != data->first_philo)
 	{
-		if (check_death(p))
-			return (p);
-		if (p->right_philo)
-			p = p->right_philo;
+		if (check_death(philo))
+			return (philo);
+		if (philo->right_philo)
+			philo = philo->right_philo;
 	}
 	return (NULL);
 }
 
-static int	check_death(t_philo *p)
+static t_bool	check_death(t_philo *philo)
 {
-	int			i;
+	t_bool		is_dead;
 	static int	y;
 
-	if (p->id == 1)
+	if (philo->id == 1)
 		y = 0;
-	pthread_mutex_lock(&p->philo_lock);
-	i = ((int)(get_current_time() - p->last_meal) >= p->data->time_to_die + 5);
-	y += (p->meals_eaten > p->data->meals_count && p->data->meals_count != -1);
-	pthread_mutex_unlock(&p->philo_lock);
-	if (y == p->data->number_of_philosophers)
+	pthread_mutex_lock(&philo->philo_lock);
+	is_dead = ((int)(get_current_time() - philo->last_meal) >= philo->data->time_to_die + 5);
+	y += (philo->meals_eaten > philo->data->meals_count && philo->data->meals_count != -1);
+	pthread_mutex_unlock(&philo->philo_lock);
+	if (y == philo->data->number_of_philosophers)
 		return (1);
-	if (p->id == p->data->number_of_philosophers)
+	if (philo->id == philo->data->number_of_philosophers)
 		y = 0;
-	return (i);
+	return (is_dead);
 }
 
-static int	check_meals(t_data *data)
+static t_bool	check_meals(t_data *data)
 {
-	t_philo	*p;
+	t_philo	*philo;
 
 	if (data->meals_count == -1)
-		return (0);
-	p = data->first_philo;
-	if (check_meal(p))
-		return (0);
-	if (p->right_philo)
-		p = p->right_philo;
-	while (p != data->first_philo)
+		return (false);
+	philo = data->first_philo;
+	if (check_meal(philo))
+		return (false);
+	if (philo->right_philo)
+		philo = philo->right_philo;
+	while (philo != data->first_philo)
 	{
-		if (check_meal(p))
-			return (0);
-		if (p->right_philo)
-			p = p->right_philo;
+		if (check_meal(philo))
+			return (false);
+		if (philo->right_philo)
+			philo = philo->right_philo;
 	}
-	return (1);
+	return (true);
 }
 
-static int	check_meal(t_philo *p)
+static t_bool	check_meal(t_philo *philo)
 {
-	int	i;
+	int	is_satisfied;
 
-	pthread_mutex_lock(&p->philo_lock);
-	i = (p->meals_eaten < p->data->meals_count);
-	pthread_mutex_unlock(&p->philo_lock);
-	return (i);
+	pthread_mutex_lock(&philo->philo_lock);
+	is_satisfied = (philo->meals_eaten < philo->data->meals_count);
+	pthread_mutex_unlock(&philo->philo_lock);
+	return (is_satisfied);
 }
