@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:05:01 by maceccar          #+#    #+#             */
-/*   Updated: 2024/09/24 15:06:24 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:29:00 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 static t_data	*load_arguments(t_data *data, char *argv[], int argc);
 static int		get_single_arg(int *taget, char *arg);
 
-// Check argc
-// Try and check malloc
-// Get the values from argv
-// Assign NULL to first_philo pointer to avoid future conditional jump
-// TO DO spostare l'inizializzazione di DATA in una funzione apparte
 /**
  @brief Intialize data and parse the parameters from argv
 

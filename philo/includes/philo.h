@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:01:24 by maceccar          #+#    #+#             */
-/*   Updated: 2024/09/25 17:27:25 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:34:43 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ t_data	*parse_arguments(int argc, char *argv[]);
 
 t_data	*initialize_table(t_data *data);
 
-void	display_table(t_data *data);
+void	*philo_routine(void *args);
+
+void	monitor(t_data *data);
+
+void	game_over(t_data *data);
 
 void	*free_all(t_data *data, char *error);
 
 void	ft_mutex_write(t_philo *philo, char *str);
 
-void	*philo_routine(void *args);
-
-void	monitor(t_data *data);
-
 int		get_game(t_philo *philo);
 
-void	game_over(t_data *data);
+void	display_table(t_data *data);
 
 #endif

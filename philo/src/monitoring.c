@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by maceccar          #+#    #+#             */
-/*   Updated: 2024/09/25 17:22:42 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:37:07 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_bool	check_philosopher(t_philo *philo)
 		philos_satisfied = 0;
 	pthread_mutex_lock(&philo->philo_lock);
 	philo_lifetime = (int)(get_current_time() - philo->last_meal);
-	is_dead = philo_lifetime >= philo->data->time_to_die + 5;
+	is_dead = philo_lifetime >= philo->data->time_to_die + 3;
 	if (philo->data->meals_count != -1)
 		if (philo->meals_eaten > philo->data->meals_count)
 			philos_satisfied++;

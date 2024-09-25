@@ -8,8 +8,7 @@ SRC = src/main.c \
 	src/game_over.c \
 	src/monitoring.c \
 	src/utils/utils.c \
-	src/utils/conversions.c \
-	src/utils/types.c \
+	src/utils/libft_functions.c
 
 INCLUDES = ./includes
 
