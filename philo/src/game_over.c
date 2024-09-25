@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_over.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 14:20:56 by tfalchi           #+#    #+#             */
-/*   Updated: 2024/09/24 18:04:35 by maceccar         ###   ########.fr       */
+/*   Created: 2024/08/11 14:20:56 by maceccar          #+#    #+#             */
+/*   Updated: 2024/09/25 17:26:05 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	set_game_over(t_philo *p);
  @details
 	Being the double liked list a ring, the last is connected with the first
 		so, first of all, we have to set game over in first philosopher
-	Pass through the list of philosophers untill (current philo != first philo)
+	Pass through the list of philosophers until (current philo != first philo)
 		Set game over
 */
 void	game_over(t_data *data)

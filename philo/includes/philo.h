@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 18:01:24 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/24 15:38:38 by maceccar         ###   ########.fr       */
+/*   Created: 2024/07/04 18:01:24 by maceccar          #+#    #+#             */
+/*   Updated: 2024/09/25 17:27:25 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef struct s_fork
 {
 	pthread_mutex_t	fork;
 }	t_fork;
-
-// Is managed as a "chain" connecting first and last "nodes"
 typedef struct s_philo
 {
 	int				id;
@@ -45,6 +43,7 @@ typedef struct s_philo
 	t_fork			*r_fork;
 	t_fork			*l_fork;
 	pthread_mutex_t	philo_lock;
+
 }	t_philo;
 
 typedef struct s_data
@@ -54,12 +53,15 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meals_count;
+
 	t_bool			game_over;
 	size_t			timestamp;
 	t_philo			*first_philo;
+
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	game_lock;
 	pthread_mutex_t	p_mutex;
+
 }	t_data;
 
 t_data	*parse_arguments(int argc, char *argv[]);
@@ -70,13 +72,13 @@ void	display_table(t_data *data);
 
 void	*free_all(t_data *data, char *error);
 
-void	ft_mutex_write(t_philo *p, char *str);
+void	ft_mutex_write(t_philo *philo, char *str);
 
 void	*philo_routine(void *args);
 
 void	monitor(t_data *data);
 
-int		get_game(t_philo *p);
+int		get_game(t_philo *philo);
 
 void	game_over(t_data *data);
 

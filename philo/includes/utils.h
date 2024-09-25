@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebartol <lebartol@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: maceccar <maceccar@student.42firenze.it>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 17:55:57 by lebartol          #+#    #+#             */
-/*   Updated: 2024/07/17 15:40:55 by lebartol         ###   ########.fr       */
+/*   Created: 2024/07/04 17:55:57 by maceccar          #+#    #+#             */
+/*   Updated: 2024/09/25 15:12:38 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
