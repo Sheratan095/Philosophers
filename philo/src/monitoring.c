@@ -6,13 +6,13 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/25 16:40:49 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:43:47 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_philo	*check_philo(t_data *data);
+static t_philo	*check_philosophers(t_data *data);
 static t_bool	check_death(t_philo *philo);
 static t_bool	check_meals(t_data *data);
 static t_bool	check_meal(t_philo *philo);
@@ -38,11 +38,11 @@ void	monitor(t_data *data)
 	if (check_meals(data))
 		ft_mutex_write(data->first_philo, "each philosopher is satisfied");
 	else
-		ft_mutex_write(check_philo(data), "has died of hunger.");
+		ft_mutex_write(check_philosophers(data), "has died of hunger.");
 	game_over(data);
 }
 
-static t_philo	*check_philo(t_data *data)
+static t_philo	*check_philosophers(t_data *data)
 {
 	t_philo	*philo;
 
