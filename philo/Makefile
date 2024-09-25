@@ -13,7 +13,7 @@ SRC = src/main.c \
 
 INCLUDES = ./includes
 
-#FLAGS		= -Wall -Werror -Wextra -I includes -pthread -fsanitize=thread -g
+# FLAGS		= -Wall -Werror -Wextra -I includes -pthread -fsanitize=thread -g
 FLAGS		=  -Wall -Werror -Wextra -I includes -pthread -g
 
 OBJS		= $(SRC:%.c=%.o)
@@ -64,7 +64,7 @@ test: all
 		./$(NAME) 2 800 200 200 100
 
 hel: all
-	valgrind --tool=helgrind --history-level=approx -s ./$(NAME) $(ARG)
+	valgrind --tool=helgrind --history-level=approx -s ./$(NAME) 100 800 200 200 10
 
 val: all
 	 valgrind --leak-check=full --track-origins=yes -s --show-leak-kinds=all ./$(NAME) 2 800 200 200 10

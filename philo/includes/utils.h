@@ -29,7 +29,7 @@ t_bool	ft_is_string_numeric(const char *str);
 
 int		ft_isdigit(int c);
 
-int		ft_usleep(size_t milliseconds);
+void	ft_usleep(size_t milliseconds);
 
 size_t	get_current_time(void);
 
