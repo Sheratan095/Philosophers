@@ -6,14 +6,14 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by lebartol          #+#    #+#             */
-/*   Updated: 2024/09/25 16:53:28 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:10:25 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static t_philo	*check_philosophers(t_data *data);
-static t_bool	check_death(t_philo *philo);
+static t_bool	check_philosopher(t_philo *philo);
 static t_bool	check_meals(t_data *data);
 static t_bool	check_meal(t_philo *philo);
 
@@ -23,13 +23,9 @@ static t_bool	check_meal(t_philo *philo);
  @param data Pointer to the main struct
 
  @details
-	Wait until no one dies
-	When one of them died
+	Wait until no one dies or all of them are satisfied
 	Check if they are all satisfied or someone died
-	That's because when all of them are satisfied the program end
-
- @return true if philosophers have eaten enough times
- @return false if philosophers haven't eaten enough times
+	Terminate the program
 */
 void	monitor(t_data *data)
 {
@@ -42,18 +38,29 @@ void	monitor(t_data *data)
 	game_over(data);
 }
 
+/**
+ @brief Check all the philosphers
+
+ @param data Pointer to the main struct
+
+ @details
+	Check if all the philosophers are still alive or satisfied
+
+ @retval Death Philo
+ @retval NULL if nothing happened
+*/
 static t_philo	*check_philosophers(t_data *data)
 {
 	t_philo	*philo;
 
 	philo = data->first_philo;
-	if (check_death(philo))
+	if (check_philosopher(philo))
 		return (philo);
 	if (philo->right_philo)
 		philo = philo->right_philo;
 	while (philo != data->first_philo)
 	{
-		if (check_death(philo))
+		if (check_philosopher(philo))
 			return (philo);
 		if (philo->right_philo)
 			philo = philo->right_philo;
@@ -61,17 +68,41 @@ static t_philo	*check_philosophers(t_data *data)
 	return (NULL);
 }
 
-static t_bool	check_death(t_philo *philo)
+/**
+ @brief Check the philospher
+
+ @param philo Pointer to the philosopher
+
+ @details
+	philo_satisfied is staitc because it's used to keep in memory in memory
+		the number of satisfied philosophers
+		It's resetted at each new call of monitoring()
+			=> when the current philo is the first
+		and (just to be sure) at the end of current call
+			=> when the current philo is the last
+	Lock the philo mutex
+	Check if the current philosopher is dead (lifetime must be < time to live)
+	Unlock the philo mutex
+	if all the philosophers are satisfied
+		return true
+
+ @retval true if one of them is dead ore all of them are satisfied
+ @retval NULL if nothing happened
+*/
+static t_bool	check_philosopher(t_philo *philo)
 {
+	int			philo_lifetime;
 	t_bool		is_dead;
 	static int	philos_satisfied;
 
 	if (philo->id == 1)
 		philos_satisfied = 0;
 	pthread_mutex_lock(&philo->philo_lock);
-	is_dead = ((int)(get_current_time() - philo->last_meal) >= philo->data->time_to_die + 5);
-	if (philo->meals_eaten > philo->data->meals_count && philo->data->meals_count != -1)
-		philos_satisfied++;
+	philo_lifetime = (int)(get_current_time() - philo->last_meal);
+	is_dead = philo_lifetime >= philo->data->time_to_die + 5;
+	if (philo->data->meals_count != -1)
+		if (philo->meals_eaten > philo->data->meals_count)
+			philos_satisfied++;
 	pthread_mutex_unlock(&philo->philo_lock);
 	if (philos_satisfied == philo->data->number_of_philosophers)
 		return (true);
