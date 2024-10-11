@@ -45,24 +45,22 @@ test: all
 		./$(NAME) 1 800 200 200
 	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die.$(RESET)"
 	@read ans
-		./$(NAME) 5 800 200 200
-	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die. $(RESET)"
+		./$(NAME) 5 800 200 200 5
+	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die$(RESET)"
 	@read ans
 		./$(NAME) 5 800 200 200 7
-	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die and the simulation should stop when every philosopher has eaten at least 7 times.$(RESET)"
+	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die$(RESET)"
 	@read ans
-		./$(NAME) 4 410 200 200
+		./$(NAME) 4 410 200 200 2
 	@echo "\n$(GREEN)[PHILO]:\t One philosopher should die.$(RESET)"
 	@read ans
 		./$(NAME) 4 310 200 100
-	@echo "\n$(GREEN)[PHILO]:\t No philosopher should die.$(RESET)"
 
 hel: all
 	valgrind --tool=helgrind --tool=drd -s ./$(NAME) 100 800 200 200 10
 
 val: all
 	 valgrind --leak-check=full --track-origins=yes -s --show-leak-kinds=all ./$(NAME) 2 800 200 200 10
-
 
 #COLORS
 

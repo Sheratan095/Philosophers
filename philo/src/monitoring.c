@@ -6,7 +6,7 @@
 /*   By: maceccar <maceccar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:43:14 by maceccar          #+#    #+#             */
-/*   Updated: 2024/09/25 17:37:07 by maceccar         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:26:04 by maceccar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	monitor(t_data *data)
 {
 	while (!check_philosophers(data))
 		usleep(2000);
-	if (check_meals(data))
+	if (check_meals(data) && data->number_of_philosophers != 1)
 		ft_mutex_write(data->first_philo, "each philosopher is satisfied");
 	else
 		ft_mutex_write(check_philosophers(data), "has died of hunger.");
